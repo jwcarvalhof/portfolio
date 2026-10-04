@@ -59,7 +59,7 @@ Alternativas de copy guardadas para a banda 3: "Do traço à tela." ou "Agora, a
 
 Cada case tem, de cima para baixo:
 
-1. **Mídia** (16:10 nos cases 1 e 3, 4:5 vertical no case 2, ideal para telas de app). Hoje: ilustração placeholder em SVG + etiqueta "imagem do projeto".
+1. **Mídia** (16:10 nos três cases, para manter o padrão). Case 1: ilustração da NEXUS; cases 2 e 3: ilustração placeholder em SVG + etiqueta "imagem do projeto".
 2. **Número** em mono (01, 02, 03) com um ponto rosa que aparece no hover.
 3. **Categoria** em mono violeta.
 4. **Título** em display.
@@ -71,10 +71,10 @@ Cada case tem, de cima para baixo:
 | Case | Desktop | Tablet | Celular |
 |---|---|---|---|
 | 01 | 62% de largura, a 4% da esquerda | 72%, encostado à esquerda | 90%, à esquerda |
-| 02 | 46%, à direita (3% da borda), descido 6vh | 58%, à direita | 80%, à direita |
+| 02 | 50%, à direita (3% da borda), descido 6vh | 58%, à direita | 80%, à direita |
 | 03 | 56%, a 20% da esquerda, 14vh abaixo | 70%, a 12% | 88%, a 5% |
 
-Placeholders diferentes para cada case: anéis concêntricos (01), tela de app (02), fluxo de telas (03). Sem inventar projetos.
+Case 01 é o projeto real NEXUS (ilustração do hero, com links para o portfólio e para o site no ar). Placeholders: fluxo de telas de app (02) e fluxo de telas (03). Sem inventar projetos.
 
 ## Regras de copy
 
