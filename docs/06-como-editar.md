@@ -14,8 +14,7 @@ Dentro do case, apague o bloco `<div class="case__ph" ...>...</div>` e coloque:
 ```
 
 Crie uma pasta `assets` ao lado do `index.html` e salve a imagem lá. Tamanhos ideais:
-- Case 01 e 03: proporção 16:10, por exemplo 1600×1000
-- Case 02: proporção 4:5 (vertical), por exemplo 1200×1500
+- Os três cases: proporção 16:10, por exemplo 1600×1000
 
 Pode apagar também a etiqueta `<span class="case__tag" ...>imagem do projeto</span>`.
 
