@@ -191,7 +191,7 @@ main{position:relative;z-index:2}
 .case{position:relative;z-index:1}
 /* eixo invisível: as três peças orbitam a coluna central, nunca uma grade */
 .case:nth-child(1){width:min(62%, 820px);margin-left:4%}
-.case:nth-child(2){width:min(46%, 600px);margin-left:auto;margin-right:3%;margin-top:6vh}
+.case:nth-child(2){width:min(50%, 660px);margin-left:auto;margin-right:3%;margin-top:6vh}
 .case:nth-child(3){width:min(56%, 740px);margin-left:20%;margin-top:14vh}
 
 .case__reveal{
@@ -214,7 +214,6 @@ main{position:relative;z-index:2}
   background:var(--panel);border:1px solid var(--line);
   transition:border-color .5s var(--ease-out), box-shadow .7s var(--ease-out);
 }
-.case:nth-child(2) .case__media{aspect-ratio:4/5}
 .case__media::after{ /* luz que segue o cursor */
   content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
   background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%), rgba(142,107,255,.18), transparent 60%);
@@ -355,7 +354,6 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
   .case:nth-child(1){width:90%;margin-left:0}
   .case:nth-child(2){width:80%;margin-left:auto;margin-right:0;margin-top:9vh}
   .case:nth-child(3){width:88%;margin-left:5%;margin-top:9vh}
-  .case:nth-child(2) .case__media{aspect-ratio:4/5}
   .case__meta{column-gap:12px;padding-top:16px}
   .thread{display:none}
   .contact__links .pill{flex:1 1 auto;justify-content:center}
@@ -535,7 +533,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
 
       <!-- ===================== CASE 02 =====================
            Mesmo processo do Case 01. Chaves: c2cat, c2title, c2desc.
-           Formato vertical (4:5): ideal para telas de app.
+           Formato 16:10, igual aos outros cases.
       ===================================================== -->
       <article class="case">
         <div class="case__para" data-speed="-0.04">
@@ -544,14 +542,14 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
               <div class="case__media">
                 <span class="case__tag" data-i18n="phTag">imagem do projeto</span>
                 <div class="case__ph" aria-hidden="true">
-                  <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
-                    <defs><linearGradient id="g2" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8E6BFF" stop-opacity=".32"/><stop offset=".6" stop-color="#8E6BFF" stop-opacity="0"/></linearGradient></defs>
-                    <rect width="400" height="500" fill="url(#g2)"/>
-                    <rect x="120" y="70" width="160" height="320" rx="26" fill="#08070C" stroke="#EEEBF4" stroke-opacity=".2"/>
-                    <g fill="#EEEBF4" fill-opacity=".1"><rect x="138" y="110" width="124" height="54" rx="10"/><rect x="138" y="174" width="124" height="54" rx="10"/><rect x="138" y="238" width="80" height="54" rx="10"/></g>
-                    <g class="pick" fill="none" stroke="#8E6BFF" stroke-width="1.2"><rect x="132" y="232" width="92" height="66"/><rect x="129.0" y="229.0" width="6" height="6" fill="#08070C"/><rect x="221.0" y="229.0" width="6" height="6" fill="#08070C"/><rect x="129.0" y="295.0" width="6" height="6" fill="#08070C"/><rect x="221.0" y="295.0" width="6" height="6" fill="#08070C"/></g>
-                    <rect x="138" y="342" width="124" height="28" rx="14" fill="#8E6BFF" fill-opacity=".85"/>
-                    <circle cx="250" cy="265" r="4" fill="#FF6FAE"/>
+                  <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+                    <defs><radialGradient id="g2" cx="50%" cy="100%" r="70%"><stop offset="0" stop-color="#8E6BFF" stop-opacity=".32"/><stop offset="1" stop-color="#8E6BFF" stop-opacity="0"/></radialGradient></defs>
+                    <rect width="800" height="500" fill="#0B0D12"/><rect width="800" height="500" fill="url(#g2)"/>
+                    <rect x="150" y="90" width="140" height="320" rx="24" fill="#08070C" stroke="#EEEBF4" stroke-opacity=".2"/><rect x="330" y="90" width="140" height="320" rx="24" fill="#08070C" stroke="#EEEBF4" stroke-opacity=".2"/><rect x="510" y="90" width="140" height="320" rx="24" fill="#08070C" stroke="#EEEBF4" stroke-opacity=".2"/>
+                    <g fill="#EEEBF4" fill-opacity=".1"><rect x="166" y="126" width="108" height="48" rx="10"/><rect x="166" y="184" width="108" height="48" rx="10"/><rect x="166" y="242" width="70" height="48" rx="10"/><rect x="346" y="126" width="108" height="48" rx="10"/><rect x="346" y="184" width="108" height="48" rx="10"/><rect x="346" y="242" width="70" height="48" rx="10"/><rect x="526" y="126" width="108" height="48" rx="10"/><rect x="526" y="184" width="108" height="48" rx="10"/><rect x="526" y="242" width="70" height="48" rx="10"/></g>
+                    <rect x="346" y="356" width="108" height="26" rx="13" fill="#8E6BFF" fill-opacity=".85"/>
+                    <g class="pick" fill="none" stroke="#8E6BFF" stroke-width="1.2"><rect x="322" y="82" width="156" height="336"/><rect x="318.5" y="78.5" width="7" height="7" fill="#08070C"/><rect x="474.5" y="78.5" width="7" height="7" fill="#08070C"/><rect x="318.5" y="414.5" width="7" height="7" fill="#08070C"/><rect x="474.5" y="414.5" width="7" height="7" fill="#08070C"/></g>
+                    <circle cx="470" cy="122" r="4" fill="#FF6FAE"/>
                   </svg>
                 </div>
               </div>
@@ -584,7 +582,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
                 <div class="case__ph" aria-hidden="true">
                   <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
                     <defs><radialGradient id="g3" cx="80%" cy="100%" r="80%"><stop offset="0" stop-color="#8E6BFF" stop-opacity=".35"/><stop offset="1" stop-color="#8E6BFF" stop-opacity="0"/></radialGradient></defs>
-                    <rect width="800" height="500" fill="url(#g3)"/>
+                    <rect width="800" height="500" fill="#0B0D12"/><rect width="800" height="500" fill="url(#g3)"/>
                     <g fill="none" stroke="#EEEBF4" stroke-opacity=".18">
                       <rect x="110" y="180" width="130" height="80" rx="14"/><rect x="335" y="120" width="130" height="80" rx="14"/><rect x="335" y="300" width="130" height="80" rx="14"/><rect x="560" y="210" width="130" height="80" rx="14"/>
                       <path d="M240 220 C290 220 290 160 335 160 M240 220 C290 220 290 340 335 340 M465 160 C515 160 515 250 560 250 M465 340 C515 340 515 250 560 250"/>
