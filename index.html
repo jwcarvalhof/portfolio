@@ -146,7 +146,8 @@ img{max-width:100%;display:block}
 .hero__name .ch{display:inline-block;transform:translateY(105%);transition:transform 1.1s var(--ease-snap)}
 .hero__name.is-in .ch{transform:none}
 .hero__sub{
-  margin:22px 0 0;max-width:34ch;font-size:clamp(16px,1.6vw,20px);color:var(--text-secondary);
+  margin:.1em 0 0;width:max-content;white-space:nowrap;font-family:var(--display);font-weight:600;line-height:.92;
+  font-size:clamp(52px, 11vw, 176px);letter-spacing:0;color:var(--text-secondary);
   opacity:0;transform:translateY(12px);transition:opacity .9s var(--ease-out) .5s, transform .9s var(--ease-out) .5s;
 }
 .hero__name.is-in + .hero__sub{opacity:1;transform:none}
@@ -632,7 +633,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
 const I18N = {
   pt:{
     skip:"Pular para os trabalhos", navContact:"Contato", kicker:"UX/UI · Web Design",
-    sub:"Faço o complicado parecer <b>óbvio</b>.", band2:"Antes do pixel,<br>a estrutura.", band3:"Do rascunho<br>ao produto.",
+    sub:"PORTIFOLIO", band2:"Antes do pixel,<br>a estrutura.", band3:"Do rascunho<br>ao produto.",
     seeWork:"Ver trabalhos", scroll:"Role", workLabel:"Trabalhos selecionados",
     workTitle:"Três projetos, <em>escolhidos a dedo.</em>", phTag:"imagem do projeto", seeCase:"Ver case", visitSite:"Acessar página", toastSite:"Essa página entra no ar em breve.",
     c1cat:"Landing page · Plataforma de jogos", c1title:"NEXUS", c1desc:"Steam, Xbox e Epic num só lugar, com recomendações que explicam o porquê.",
@@ -645,7 +646,7 @@ const I18N = {
   },
   en:{
     skip:"Skip to the work", navContact:"Contact", kicker:"UX/UI · Web Design",
-    sub:"I make the complicated feel <b>obvious</b>.", band2:"Structure<br>before pixels.", band3:"From sketch<br>to shipped.",
+    sub:"PORTIFOLIO", band2:"Structure<br>before pixels.", band3:"From sketch<br>to shipped.",
     seeWork:"See the work", scroll:"Scroll", workLabel:"Selected work",
     workTitle:"Three projects, <em>handpicked.</em>", phTag:"project image", seeCase:"View case", visitSite:"Visit live page", toastSite:"This page goes live soon.",
     c1cat:"Landing page · Game platform", c1title:"NEXUS", c1desc:"Steam, Xbox and Epic in one place, with recommendations that explain why.",
@@ -698,6 +699,20 @@ $$(".w", nameEl).forEach((w, wi) => {
   });
 });
 requestAnimationFrame(() => requestAnimationFrame(() => nameEl.classList.add("is-in")));
+/* PORTIFOLIO: espaça as letras até igualar a largura do nome */
+const subEl = $(".hero__sub");
+function fitSub(){
+  if(!subEl) return;
+  const target = Math.max(...$$(".w", nameEl).map(w => { const r = document.createRange(); r.selectNodeContents(w); return r.getBoundingClientRect().width; }));
+  if(!target) return;
+  const K = .42; /* espaçamento entre letras, em em */
+  subEl.style.fontSize = "100px"; subEl.style.letterSpacing = K + "em"; subEl.style.marginRight = (-K*100) + "px";
+  const w100 = subEl.getBoundingClientRect().width - K*100;
+  const fs = 100 * target / w100;
+  subEl.style.fontSize = fs + "px"; subEl.style.marginRight = (-K*fs) + "px";
+}
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fitSub);
+addEventListener("resize", fitSub); addEventListener("load", fitSub);
 
 /* ================= o site se desenhando ================= */
 const hero = $(".hero");
