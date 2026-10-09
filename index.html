@@ -288,9 +288,9 @@ main{position:relative;z-index:2}
 /* ---------- portal: o card vira a tela ---------- */
 .portal{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden}
 .portal__veil{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 110%, rgba(142,107,255,.22), transparent 60%), #08070C;opacity:0}
-.portal__win{position:absolute;overflow:hidden;border-radius:20px;background:#0B0D12;
-  opacity:0}
-.portal__win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:var(--ox,50%) var(--oy,50%)}
+.portal__ring{position:absolute;border:1px solid var(--accent);opacity:0}
+.portal__ring::before,.portal__ring::after{content:"";position:absolute;width:7px;height:7px;background:#08070C;border:1px solid var(--accent)}
+.portal__ring::before{left:-4px;top:-4px}.portal__ring::after{right:-4px;bottom:-4px}
 .portal__lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .portal__lines *{fill:none;stroke:rgba(238,235,244,.55);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .portal__lines .v{stroke:var(--accent);stroke-width:1.5}
@@ -851,10 +851,9 @@ function enterPortal(link){
   const host = ($(".case__title", card) || {}).textContent || "";
 
   const P = document.createElement("div"); P.className = "portal"; P.setAttribute("aria-hidden","true");
-  P.innerHTML = `<div class="portal__veil"></div><div class="portal__win"></div><svg class="portal__lines"><g class="meta"></g><g class="grow"></g></svg><p class="portal__label"><i></i>${lang === "en" ? "Entering" : "Entrando em"} <b>${host}</b></p><div class="portal__end"></div>`;
-  const veil = $(".portal__veil", P), win = $(".portal__win", P), label = $(".portal__label", P), end = $(".portal__end", P);
+  P.innerHTML = `<div class="portal__veil"></div><svg class="portal__lines"><g class="meta"></g><g class="grow"></g></svg><p class="portal__label"><i></i>${lang === "en" ? "Entering" : "Entrando em"} <b>${host}</b></p><div class="portal__end"></div>`;
+  const veil = $(".portal__veil", P), label = $(".portal__label", P), end = $(".portal__end", P);
   const gMeta = $(".meta", P), gGrow = $(".grow", P);
-  const pic = img.cloneNode(); pic.removeAttribute("loading"); pic.removeAttribute("style"); win.appendChild(pic);
 
   /* 1) o card vira o desenho de um site: moldura, menu, título, imagem, botão */
   const X = f => r.left + r.width * f, Y = f => r.top + r.height * f;
@@ -901,19 +900,21 @@ function enterPortal(link){
   const full = `translate(${-r.left * sx}px, ${-r.top * sy}px) scale(${sx}, ${sy})`;
   const k = 1.18, past = `translate(${-r.left * sx * k + (1 - k) * -vw/2 * -1}px, ${-r.top * sy * k + (1 - k) * -vh/2 * -1}px) scale(${sx * k}, ${sy * k})`;
   gGrow.animate([{ transform:"translate(0,0) scale(1,1)", opacity:1 }, { offset:.8, transform:full, opacity:1 }, { transform:past, opacity:0 }], { duration:D, delay:T0, easing:ease, fill:"forwards" });
-  /* 3) durante a aproximação a moldura abre: o site aparece dentro dela */
-  win.animate([
-    { left:r.left+"px", top:r.top+"px", width:r.width+"px", height:r.height+"px", borderRadius:"20px", opacity:0 },
-    { offset:.45, opacity:0 },
-    { offset:.8, left:"0px", top:"0px", width:vw+"px", height:vh+"px", borderRadius:"0px", opacity:1 },
-    { left:"0px", top:"0px", width:vw+"px", height:vh+"px", borderRadius:"0px", opacity:1 }
-  ], { duration:D, delay:T0, easing:ease, fill:"forwards" });
-  pic.animate([{ transform:"scale(1.12)" }, { transform:"scale(1)" }], { duration:D, delay:T0, easing:ease, fill:"forwards" });
+  /* 3) a queda: depois de encher a tela, molduras vêm do fundo e passam por você */
+  const T1 = T0 + D * .62, RD = 620, RN = 5, RS = 90;
+  for (let i = 0; i < RN; i++){
+    const g = document.createElement("span"); g.className = "portal__ring"; P.insertBefore(g, label);
+    const w0 = vw * .1, h0 = w0 * (r.height / r.width);
+    g.style.left = (vw/2 - w0/2) + "px"; g.style.top = (vh/2 - h0/2) + "px"; g.style.width = w0 + "px"; g.style.height = h0 + "px";
+    g.animate([{ transform:"scale(.3)", opacity:0 }, { offset:.2, opacity:.9 }, { transform:"scale(13)", opacity:0 }],
+      { duration:RD, delay:T1 + i * RS, easing:"cubic-bezier(.6,0,.9,.4)", fill:"forwards" });
+  }
+  const TE = T1 + (RN - 1) * RS + RD;
 
   /* 4) legenda curta e a passagem */
-  label.animate([{ opacity:0, transform:"translate(-50%,10px)" }, { opacity:1, transform:"translate(-50%,0)" }, { opacity:0, transform:"translate(-50%,0)" }], { duration:900, delay:T0 + 200, easing:"ease-out", fill:"forwards" });
-  end.animate([{ opacity:0 }, { opacity:.85 }], { duration:260, delay:T0 + D - 40, easing:"ease-in", fill:"forwards" });
-  setTimeout(() => { location.href = url; }, T0 + D + 180);
+  label.animate([{ opacity:0, transform:"translate(-50%,10px)" }, { opacity:1, transform:"translate(-50%,0)" }], { duration:420, delay:T0 + 300, easing:"cubic-bezier(.16,1,.3,1)", fill:"forwards" });
+  end.animate([{ opacity:0 }, { opacity:1 }], { duration:280, delay:TE - 260, easing:"ease-in", fill:"forwards" });
+  setTimeout(() => { location.href = url; }, TE + 60);
 }
 $$("[data-portal]").forEach(l => l.addEventListener("click", e => {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; /* nova aba: comportamento normal */
