@@ -531,7 +531,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
                 <p class="case__desc" data-i18n="c1desc">Case em revisão final. Vale a espera.</p>
                 <div class="case__actions">
                   <a class="case__cta" href="https://nexus-portifolio-seven.vercel.app/" target="_blank" rel="noopener"><span data-i18n="seeCase">Ver case</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg></a>
-                  <a class="case__site" href="https://nexus-games-roan-xi.vercel.app/" data-portal><span data-i18n="visitSite">Acessar página</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
+                  <a class="case__site" href="https://nexus-games-roan-xi.vercel.app/?lang=pt" data-href-pt="https://nexus-games-roan-xi.vercel.app/?lang=pt" data-href-en="https://nexus-games-roan-xi.vercel.app/?lang=en" data-portal><span data-i18n="visitSite">Acessar página</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
                 </div>
               </div>
             </div>
@@ -561,7 +561,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
                   <!-- Link do case: troque href="#" e remova data-placeholder -->
                   <a class="case__cta" href="https://lueur-portifolio-6fxg7fxj7-jhonatans-projects-c4943e9b.vercel.app" target="_blank" rel="noopener"><span data-i18n="seeCase">Ver case</span><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg></a>
                   <!-- Página no ar: troque href="#" pela URL publicada e remova data-placeholder -->
-                  <a class="case__site" href="https://lueur-site-hty31led0-jhonatans-projects-c4943e9b.vercel.app" data-portal><span data-i18n="visitSite">Acessar página</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
+                  <a class="case__site" href="https://lueur-site.vercel.app/?lang=pt" data-href-pt="https://lueur-site.vercel.app/?lang=pt" data-href-en="https://lueur-site.vercel.app/?lang=en" data-portal><span data-i18n="visitSite">Acessar página</span><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
                 </div>
               </div>
             </div>
@@ -639,6 +639,8 @@ function applyLang(l, animate){
   const run = () => {
     const d = I18N[l];
     $$("[data-i18n]").forEach(el => { const k = el.dataset.i18n; if (d[k] != null) el.innerHTML = d[k]; });
+    /* links que têm versão por idioma (data-href-pt / data-href-en) */
+    $$("[data-href-" + l + "]").forEach(a => { a.href = a.getAttribute("data-href-" + l); });
     document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
     document.title = d.title;
     $(".lang").dataset.lang = l;
