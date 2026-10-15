@@ -521,7 +521,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
             <div class="case__link">
               <div class="case__media">
                 <div class="case__ph" aria-hidden="true">
-                  <img src="assets/case-01.webp" alt="NEXUS: todas as suas bibliotecas, um só lugar." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+                  <img src="assets/case-01.webp" data-src-pt="assets/case-01.webp" data-src-en="assets/case-01-en.webp" data-alt-pt="NEXUS: todas as suas bibliotecas, um só lugar." data-alt-en="NEXUS: all your game libraries, one place." alt="NEXUS: todas as suas bibliotecas, um só lugar." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
                 </div>
               </div>
               <div class="case__meta">
@@ -549,7 +549,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
             <div class="case__link">
               <div class="case__media">
                 <div class="case__ph" aria-hidden="true">
-                  <img src="assets/case-02.webp" alt="LUEUR: perfumaria conceitual. O que fica depois que você sai." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+                  <img src="assets/case-02.webp" data-src-pt="assets/case-02.webp" data-src-en="assets/case-02-en.webp" data-alt-pt="LUEUR: perfumaria conceitual. O que fica depois que você sai." data-alt-en="LUEUR: conceptual perfumery. What stays after you leave." alt="LUEUR: perfumaria conceitual. O que fica depois que você sai." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
                 </div>
               </div>
               <div class="case__meta">
@@ -580,7 +580,7 @@ body.is-morph .hero, body.is-morph main, body.is-morph .foot{opacity:0;filter:bl
             <div class="case__link">
               <div class="case__media">
                 <div class="case__ph" aria-hidden="true">
-                  <img src="assets/case-03.webp" alt="VERANA: lugares reais, no seu tempo. Hospedagens no Brasil e no mundo." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+                  <img src="assets/case-03.webp" data-src-pt="assets/case-03.webp" data-src-en="assets/case-03-en.webp" data-alt-pt="VERANA: lugares reais, no seu tempo. Hospedagens no Brasil e no mundo." data-alt-en="VERANA: real places, at your own pace. Stays around the world." alt="VERANA: lugares reais, no seu tempo. Hospedagens no Brasil e no mundo." width="960" height="600" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
                 </div>
               </div>
               <div class="case__meta">
@@ -671,6 +671,8 @@ function applyLang(l, animate){
     $$("[data-i18n]").forEach(el => { const k = el.dataset.i18n; if (d[k] != null) el.innerHTML = d[k]; });
     /* links que têm versão por idioma (data-href-pt / data-href-en) */
     $$("[data-href-" + l + "]").forEach(a => { a.href = a.getAttribute("data-href-" + l); });
+    /* imagens com versão por idioma */
+    $$("[data-src-" + l + "]").forEach(i => { i.src = i.getAttribute("data-src-" + l); i.alt = i.getAttribute("data-alt-" + l) || i.alt; });
     document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
     document.title = d.title;
     $(".lang").dataset.lang = l;
