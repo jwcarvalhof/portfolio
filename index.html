@@ -20,7 +20,7 @@
    Preto abre e fecha, branco apresenta o trabalho, o roxo só seleciona. */
 :root{
   --black:#08080C; --white:#FFFFFF; --purple:#7954F6;
-  --ink:#08080C; --ink-2:#55545E; --ink-3:#8B8A94; --paper-2:#F3F2F6;
+  --ink:#08080C; --ink-2:#55545E; --ink-3:#6A6973; --paper-2:#F3F2F6;
   --on-dark-2:#A6A5AF; --line-dark:#24232B;
   --display:"Archivo", "Archivo Variable", "Arial Narrow", sans-serif;
   --serif:"Instrument Serif", Georgia, serif;
@@ -38,7 +38,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 img{display:block;max-width:100%}
 ::selection{background:var(--purple);color:var(--white)}
 :focus-visible{outline:2px solid var(--purple);outline-offset:4px;border-radius:4px}
-section{scroll-margin-top:64px}
+section{scroll-margin-top:96px}
 
 .wrap{padding-inline:var(--pad)}
 .cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
@@ -105,24 +105,27 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
 /* projetos: duas colunas idênticas */
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);row-gap:clamp(48px, 5.4vw, 80px)}
 .card{display:block}
+.card__media{display:block}
 .card__img{aspect-ratio:16/10;border-radius:var(--r);overflow:hidden;background:var(--paper-2)}
 .card__img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.1s var(--ease)}
 .card__row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-top:22px}
 .card__name{margin:0;font-family:var(--display);font-stretch:62%;font-weight:800;text-transform:uppercase;font-size:clamp(28px, 2.4vw, 36px);line-height:1;transition:color .3s var(--ease)}
 .card__cat{font-size:14px;color:var(--ink-3);white-space:nowrap}
 .card__desc{margin:10px 0 0;max-width:46ch;color:var(--ink-2)}
+.card__links{display:flex;gap:28px;margin-top:18px;font-size:15px;font-weight:500}
+.card__links a{display:inline-flex;gap:6px;align-items:center;color:var(--ink);padding-block:6px;border-bottom:1.5px solid transparent;transition:color .3s var(--ease),border-color .3s var(--ease)}
+.card__links a:hover{color:var(--purple);border-color:var(--purple)}
 @media (hover:hover) and (pointer:fine){
   .card:hover .card__img img{transform:scale(1.025)}
   .card:hover .card__name{color:var(--purple)}
 }
-.cases{margin-top:clamp(36px, 4vw, 56px);color:var(--ink-3);font-size:14px}
-.cases a{color:var(--ink);border-bottom:1px solid rgba(8,8,12,.2);transition:border-color .3s, color .3s}
-.cases a:hover{color:var(--purple);border-color:var(--purple)}
 
-/* abordagem: um parágrafo, com os três verbos dentro do texto */
+/* abordagem: a ideia em uma frase e as três etapas lado a lado */
 .approach .title{grid-column:1 / span 4}
-.approach__text{grid-column:5 / span 8;margin:0;font-family:var(--serif);font-size:clamp(28px, 3vw, 44px);line-height:1.14;letter-spacing:-.01em;color:var(--ink-2)}
-.approach__text em{font-style:italic;color:var(--ink)}
+.approach__lead{grid-column:5 / span 8;margin:0;font-family:var(--serif);font-size:clamp(28px, 3vw, 44px);line-height:1.14;letter-spacing:-.005em;color:var(--ink)}
+.steps{grid-column:5 / span 8;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap);margin:clamp(40px, 4.4vw, 64px) 0 0;padding:0;list-style:none}
+.steps b{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(34px, 3.2vw, 48px);line-height:1;letter-spacing:-.01em;color:var(--purple)}
+.steps span{display:block;margin-top:12px;max-width:24ch;color:var(--ink-2);line-height:1.5}
 
 /* sobre */
 .about__photo{grid-column:1 / span 5;margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;background:var(--paper-2)}
@@ -130,6 +133,8 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
 .about__copy{grid-column:7 / span 6;align-self:center}
 .about__copy .title{margin-bottom:32px}
 .about__copy .lead{margin-bottom:24px;color:var(--ink)}
+.about__does{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;padding:0;list-style:none}
+.about__does li{padding:9px 16px;border-radius:999px;background:var(--paper-2);color:var(--ink);font-size:15px}
 .about__copy p:not(.lead){margin:0 0 16px;max-width:54ch;color:var(--ink-2);font-size:17px;line-height:1.65}
 
 /* ===================== CONTATO ===================== */
@@ -161,7 +166,7 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
   .head .title{grid-column:1 / -1}
   .head .lead{grid-column:1 / span 8;margin-top:20px}
   .approach .title{grid-column:1 / -1;margin-bottom:28px}
-  .approach__text{grid-column:1 / -1}
+  .approach__lead,.steps{grid-column:1 / -1}
   .about__photo{grid-column:1 / span 6}
   .about__copy{grid-column:7 / span 6}
   .contact__title{grid-column:1 / -1}
@@ -172,15 +177,22 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
    Os projetos ficam um por linha, com o mesmo cartão. */
 @media (max-width:700px){
   .top{padding:16px var(--pad)}
-  .nav{display:none}
-  .hero{padding-top:120px;padding-bottom:88px}
-  .brand span{display:block}
+  .top{flex-wrap:wrap;row-gap:14px;align-items:baseline}
+  .top__end{display:contents}
+  .lang{order:2}
+  .nav{order:3;flex:0 0 100%;gap:26px;font-size:15px}
+  .nav a{opacity:.75;padding-block:2px}
+  .top.is-solid{padding-block:12px}
+  .hero{padding-top:172px;padding-bottom:88px}
+  .brand span{display:none}
   .hero__intro{grid-column:1 / -1}
   .hero__title .l1{font-size:21vw}
   .hero__title .l2{font-size:14.6vw;text-align:left}
   .head .lead{grid-column:1 / -1}
   .grid{grid-template-columns:1fr}
   .card__row{flex-direction:column;gap:6px}
+  .steps{grid-template-columns:1fr;row-gap:28px}
+  .steps span{max-width:none}
   .about__photo,.about__copy{grid-column:1 / -1}
   .about__photo{margin-bottom:48px}
   .contact__side{grid-column:1 / -1}
@@ -214,7 +226,7 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
     </h1>
     <div class="cols">
       <div class="hero__intro">
-        <p class="lead" data-i18n="heroText">Web designer com atuação em UX/UI. <span>Crio interfaces e experiências digitais em que cada escolha visual responde a uma pergunta sobre quem vai usar.</span></p>
+        <p class="lead" data-i18n="heroText">Crio interfaces em que cada escolha visual <span>responde a uma pergunta sobre quem vai usar.</span></p>
       </div>
     </div>
   </section>
@@ -223,43 +235,46 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
     <section class="block wrap" id="trabalhos" aria-labelledby="work-title">
       <div class="cols head">
         <h2 class="title" id="work-title" data-i18n="workTitle">Projetos selecionados</h2>
-        <p class="lead" data-i18n="workText">Experiências digitais construídas com intenção, clareza e <em>personalidade.</em></p>
+        <p class="lead" data-i18n="workText">Do problema à interface <em>publicada.</em></p>
       </div>
 
       <div class="grid">
-        <a class="card" href="https://nexus-games-roan-xi.vercel.app/?lang=pt" data-href-pt="https://nexus-games-roan-xi.vercel.app/?lang=pt" data-href-en="https://nexus-games-roan-xi.vercel.app/?lang=en" target="_blank" rel="noopener">
-          <div class="card__img"><img src="assets/hero/nexus-d.webp" data-src-pt="assets/hero/nexus-d.webp" data-src-en="assets/hero/nexus-d-en.webp" alt="Página inicial da Nexus" width="1600" height="1000" loading="lazy"></div>
-          <div class="card__row"><h3 class="card__name">Nexus</h3><span class="card__cat" data-i18n="catNexus">UX/UI e Web Design</span></div>
+        <article class="card">
+          <a class="card__media" href="https://nexus-portifolio-seven.vercel.app/" data-href-pt="https://nexus-portifolio-seven.vercel.app/" data-href-en="https://nexus-portifolio-seven.vercel.app/?lang=en" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="card__img"><img src="assets/hero/nexus-d.webp" data-src-pt="assets/hero/nexus-d.webp" data-src-en="assets/hero/nexus-d-en.webp" alt="Página inicial da Nexus" width="1600" height="1000" loading="lazy"></div></a>
+          <div class="card__row"><h3 class="card__name"><a href="https://nexus-portifolio-seven.vercel.app/" data-href-pt="https://nexus-portifolio-seven.vercel.app/" data-href-en="https://nexus-portifolio-seven.vercel.app/?lang=en" target="_blank" rel="noopener">Nexus</a></h3><span class="card__cat" data-i18n="catNexus">UX/UI e Web Design</span></div>
           <p class="card__desc" data-i18n="descNexus">Uma só biblioteca para jogos da Steam, do Xbox e da Epic, com recomendações que explicam o porquê.</p>
-        </a>
-        <a class="card" href="https://lueur-site.vercel.app/?lang=pt" data-href-pt="https://lueur-site.vercel.app/?lang=pt" data-href-en="https://lueur-site.vercel.app/?lang=en" target="_blank" rel="noopener">
-          <div class="card__img"><img src="assets/hero/lueur-d.webp" data-src-pt="assets/hero/lueur-d.webp" data-src-en="assets/hero/lueur-d-en.webp" alt="Página inicial da Lueur" width="1440" height="900" loading="lazy"></div>
-          <div class="card__row"><h3 class="card__name">Lueur</h3><span class="card__cat" data-i18n="catLueur">Web Design</span></div>
+          <div class="card__links"><a href="https://nexus-portifolio-seven.vercel.app/" data-href-pt="https://nexus-portifolio-seven.vercel.app/" data-href-en="https://nexus-portifolio-seven.vercel.app/?lang=en" target="_blank" rel="noopener"><span data-i18n="caseLink">Ver estudo de caso</span> →</a></div>
+        </article>
+        <article class="card">
+          <a class="card__media" href="https://lueur-portifolio.vercel.app" data-href-pt="https://lueur-portifolio.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="card__img"><img src="assets/hero/lueur-d.webp" data-src-pt="assets/hero/lueur-d.webp" data-src-en="assets/hero/lueur-d-en.webp" alt="Página inicial da Lueur" width="1440" height="900" loading="lazy"></div></a>
+          <div class="card__row"><h3 class="card__name"><a href="https://lueur-portifolio.vercel.app" data-href-pt="https://lueur-portifolio.vercel.app" target="_blank" rel="noopener">Lueur</a></h3><span class="card__cat" data-i18n="catLueur">Web Design</span></div>
           <p class="card__desc" data-i18n="descLueur">Site de uma perfumaria conceitual, construído em torno do que fica depois que você sai.</p>
-        </a>
-        <a class="card" href="https://verana-jet.vercel.app" data-href-pt="https://verana-jet.vercel.app" data-href-en="https://verana-jet.vercel.app/?lang=en" target="_blank" rel="noopener">
-          <div class="card__img"><img src="assets/hero/verana-d.webp" data-src-pt="assets/hero/verana-d.webp" data-src-en="assets/hero/verana-d-en.webp" alt="Página inicial da Verana" width="1440" height="900" loading="lazy"></div>
-          <div class="card__row"><h3 class="card__name">Verana</h3><span class="card__cat" data-i18n="catVerana">UX/UI e Web Design</span></div>
+          <div class="card__links"><a href="https://lueur-portifolio.vercel.app" data-href-pt="https://lueur-portifolio.vercel.app" target="_blank" rel="noopener"><span data-i18n="caseLink">Ver estudo de caso</span> →</a></div>
+        </article>
+        <article class="card">
+          <a class="card__media" href="https://verana-case.vercel.app" data-href-pt="https://verana-case.vercel.app" data-href-en="https://verana-case.vercel.app?lang=en" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="card__img"><img src="assets/hero/verana-d.webp" data-src-pt="assets/hero/verana-d.webp" data-src-en="assets/hero/verana-d-en.webp" alt="Página inicial da Verana" width="1440" height="900" loading="lazy"></div></a>
+          <div class="card__row"><h3 class="card__name"><a href="https://verana-case.vercel.app" data-href-pt="https://verana-case.vercel.app" data-href-en="https://verana-case.vercel.app?lang=en" target="_blank" rel="noopener">Verana</a></h3><span class="card__cat" data-i18n="catVerana">UX/UI e Web Design</span></div>
           <p class="card__desc" data-i18n="descVerana">Busca de hospedagens para quem quer trocar de cenário no próprio ritmo.</p>
-        </a>
-        <a class="card" href="https://voltw.vercel.app/?lang=pt" data-href-pt="https://voltw.vercel.app/?lang=pt" data-href-en="https://voltw.vercel.app/?lang=en" target="_blank" rel="noopener">
-          <div class="card__img"><img src="assets/hero/volt-d.webp" data-src-pt="assets/hero/volt-d.webp" data-src-en="assets/hero/volt-d-en.webp" alt="Página inicial do Volt One" width="1440" height="900" loading="lazy"></div>
+          <div class="card__links"><a href="https://verana-case.vercel.app" data-href-pt="https://verana-case.vercel.app" data-href-en="https://verana-case.vercel.app?lang=en" target="_blank" rel="noopener"><span data-i18n="caseLink">Ver estudo de caso</span> →</a></div>
+        </article>
+        <article class="card">
+          <a class="card__media" href="https://voltw.vercel.app/?lang=pt" data-href-pt="https://voltw.vercel.app/?lang=pt" data-href-en="https://voltw.vercel.app/?lang=en" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="card__img"><img src="assets/hero/volt-d.webp" data-src-pt="assets/hero/volt-d.webp" data-src-en="assets/hero/volt-d-en.webp" alt="Página inicial do Volt One" width="1440" height="900" loading="lazy"></div></a>
           <div class="card__row"><h3 class="card__name">Volt One</h3><span class="card__cat" data-i18n="catVolt">Web Design e 3D</span></div>
           <p class="card__desc" data-i18n="descVolt">Lançamento de um smartwatch que se revela camada por camada, em 3D.</p>
-        </a>
+          <div class="card__links"><a class="" href="https://voltw.vercel.app/?lang=pt" data-href-pt="https://voltw.vercel.app/?lang=pt" data-href-en="https://voltw.vercel.app/?lang=en" target="_blank" rel="noopener"><span data-i18n="siteLink">Ver site</span> ↗</a></div>
+        </article>
       </div>
-
-      <p class="cases"><span data-i18n="casesLabel">Estudos de caso:</span>
-        <a href="https://nexus-portifolio-seven.vercel.app/" data-href-pt="https://nexus-portifolio-seven.vercel.app/" data-href-en="https://nexus-portifolio-seven.vercel.app/?lang=en" target="_blank" rel="noopener">Nexus</a>,
-        <a href="https://lueur-portifolio-6fxg7fxj7-jhonatans-projects-c4943e9b.vercel.app" target="_blank" rel="noopener">Lueur</a> <span data-i18n="and">e</span>
-        <a href="https://verana-case.vercel.app" data-href-pt="https://verana-case.vercel.app" data-href-en="https://verana-case.vercel.app/?lang=en" target="_blank" rel="noopener">Verana</a>.
-      </p>
     </section>
 
     <section class="block wrap approach" aria-labelledby="approach-title">
       <div class="cols">
         <h2 class="title" id="approach-title" data-i18n="apTitle">Abordagem</h2>
-        <p class="approach__text" data-i18n="apText">A estética vem depois das perguntas. Primeiro <em>entendo</em> o contexto, as pessoas e o objetivo. Depois <em>estruturo</em> a hierarquia, a navegação e a ordem da informação. Só então <em>projeto</em> a interface, a interação e cada detalhe visual.</p>
+        <p class="approach__lead" data-i18n="apLead">A estética vem depois das perguntas.</p>
+        <ol class="steps">
+          <li><b data-i18n="st1">Entendo</b><span data-i18n="st1t">o contexto, as pessoas e o objetivo.</span></li>
+          <li><b data-i18n="st2">Estruturo</b><span data-i18n="st2t">a hierarquia, a navegação e a ordem da informação.</span></li>
+          <li><b data-i18n="st3">Projeto</b><span data-i18n="st3t">a interface, a interação e cada detalhe visual.</span></li>
+        </ol>
       </div>
     </section>
 
@@ -269,8 +284,8 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
         <div class="about__copy">
           <h2 class="title" id="about-title" data-i18n="abTitle">Curioso por natureza</h2>
           <p class="lead" data-i18n="ab1">O que me move é entender o que existe por trás de cada ideia: quem vai usar, do que essa pessoa precisa e como transformar isso em uma experiência <em>clara.</em></p>
-          <p data-i18n="ab2">Aprendo experimentando. Observo o problema por diferentes perspectivas e presto atenção aos detalhes que costumam passar despercebidos, porque é neles que muitas vezes está a melhor solução.</p>
-          <p data-i18n="ab3">Acredito que sempre há algo novo para descobrir, aprender e construir. Por isso fujo do óbvio e levo essa curiosidade para cada projeto.</p>
+          <p data-i18n="ab2">Aprendo experimentando e olho cada problema por mais de um ângulo. Presto atenção nos detalhes que passam despercebidos, porque é neles que costuma estar a melhor solução.</p>
+          <ul class="about__does"><li data-i18n="do1">Design de interfaces</li><li data-i18n="do2">Protótipos no Figma</li><li data-i18n="do3">Sites e landing pages</li></ul>
         </div>
       </div>
     </section>
@@ -280,7 +295,7 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
     <div class="cols">
       <h2 class="contact__title" id="contact-title" data-i18n="ctTitle">Vamos <em>conversar?</em></h2>
       <div class="contact__side">
-        <p class="lead" data-i18n="ctText">Disponível para novos projetos e boas ideias.</p>
+        <p class="lead" data-i18n="ctText">Atendo no Brasil e no exterior. Conte o que você precisa construir.</p>
         <button class="mail" type="button" data-copy="jwcarvalho.f@gmail.com" aria-describedby="mail-state">
           jwcarvalho.f@gmail.com
           <svg class="ic-copy" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6.5" y="6.5" width="10" height="10" rx="2.5"/><path d="M13.5 4.5v-.5a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h.5"/></svg>
@@ -302,37 +317,35 @@ body.on-light .top.is-solid{background:rgba(255,255,255,.86)}
 "use strict";
 const I18N = {
   pt:{ navWork:"Trabalhos", navAbout:"Sobre", navContact:"Contato",
-    heroText:"Web designer com atuação em UX/UI. <span>Crio interfaces e experiências digitais em que cada escolha visual responde a uma pergunta sobre quem vai usar.</span>",
+    heroText:"Crio interfaces em que cada escolha visual <span>responde a uma pergunta sobre quem vai usar.</span>",
     ctaWork:"Explorar projetos", h1a:"Primeiro entendo.", h1b:"Depois desenho.",
-    workTitle:"Projetos selecionados", workText:"Experiências digitais construídas com intenção, clareza e <em>personalidade.</em>",
+    workTitle:"Projetos selecionados", workText:"Do problema à interface <em>publicada.</em>",
     catNexus:"UX/UI e Web Design", catLueur:"Web Design", catVerana:"UX/UI e Web Design", catVolt:"Web Design e 3D",
     descNexus:"Uma só biblioteca para jogos da Steam, do Xbox e da Epic, com recomendações que explicam o porquê.",
     descLueur:"Site de uma perfumaria conceitual, construído em torno do que fica depois que você sai.",
     descVerana:"Busca de hospedagens para quem quer trocar de cenário no próprio ritmo.",
     descVolt:"Lançamento de um smartwatch que se revela camada por camada, em 3D.",
-    casesLabel:"Estudos de caso:", and:"e",
-    apTitle:"Abordagem", apText:"A estética vem depois das perguntas. Primeiro <em>entendo</em> o contexto, as pessoas e o objetivo. Depois <em>estruturo</em> a hierarquia, a navegação e a ordem da informação. Só então <em>projeto</em> a interface, a interação e cada detalhe visual.",
+    caseLink:"Ver estudo de caso", siteLink:"Ver site", do1:"Design de interfaces", do2:"Protótipos no Figma", do3:"Sites e landing pages",
+    apTitle:"Abordagem", apLead:"A estética vem depois das perguntas.", st1:"Entendo", st1t:"o contexto, as pessoas e o objetivo.", st2:"Estruturo", st2t:"a hierarquia, a navegação e a ordem da informação.", st3:"Projeto", st3t:"a interface, a interação e cada detalhe visual.",
     abTitle:"Curioso por natureza",
     ab1:"O que me move é entender o que existe por trás de cada ideia: quem vai usar, do que essa pessoa precisa e como transformar isso em uma experiência <em>clara.</em>",
-    ab2:"Aprendo experimentando. Observo o problema por diferentes perspectivas e presto atenção aos detalhes que costumam passar despercebidos, porque é neles que muitas vezes está a melhor solução.",
-    ab3:"Acredito que sempre há algo novo para descobrir, aprender e construir. Por isso fujo do óbvio e levo essa curiosidade para cada projeto.",
-    ctTitle:"Vamos <em>conversar?</em>", ctText:"Disponível para novos projetos e boas ideias.", mailApp:"Abrir no e-mail ↗", copied:"E-mail copiado." },
+    ab2:"Aprendo experimentando e olho cada problema por mais de um ângulo. Presto atenção nos detalhes que passam despercebidos, porque é neles que costuma estar a melhor solução.",
+    ctTitle:"Vamos <em>conversar?</em>", ctText:"Atendo no Brasil e no exterior. Conte o que você precisa construir.", mailApp:"Abrir no e-mail ↗", copied:"E-mail copiado." },
   en:{ navWork:"Work", navAbout:"About", navContact:"Contact",
-    heroText:"Web designer working in UX/UI. <span>I design interfaces and digital experiences where every visual choice answers a question about who will use it.</span>",
+    heroText:"I design interfaces where every visual choice <span>answers a question about who will use it.</span>",
     ctaWork:"Explore projects", h1a:"First I understand.", h1b:"Then I design.",
-    workTitle:"Selected projects", workText:"Digital experiences built with intention, clarity and <em>personality.</em>",
+    workTitle:"Selected projects", workText:"From the problem to the <em>published</em> interface.",
     catNexus:"UX/UI and Web Design", catLueur:"Web Design", catVerana:"UX/UI and Web Design", catVolt:"Web Design and 3D",
     descNexus:"One library for Steam, Xbox and Epic games, with recommendations that explain why.",
     descLueur:"Website for a conceptual perfume house, built around what stays after you leave.",
     descVerana:"Stay search for people who want a change of scenery at their own pace.",
     descVolt:"Launch of a smartwatch that reveals itself layer by layer, in 3D.",
-    casesLabel:"Case studies:", and:"and",
-    apTitle:"Approach", apText:"Aesthetics come after the questions. First I <em>understand</em> the context, the people and the goal. Then I <em>structure</em> the hierarchy, the navigation and the order of information. Only then do I <em>design</em> the interface, the interaction and every visual detail.",
+    caseLink:"View case study", siteLink:"View site", do1:"Interface design", do2:"Figma prototypes", do3:"Websites and landing pages",
+    apTitle:"Approach", apLead:"Aesthetics come after the questions.", st1:"I understand", st1t:"the context, the people and the goal.", st2:"I structure", st2t:"the hierarchy, the navigation and the order of information.", st3:"I design", st3t:"the interface, the interaction and every visual detail.",
     abTitle:"Curious by nature",
     ab1:"What drives me is understanding what sits behind every idea: who will use it, what they need and how to turn that into a <em>clear</em> experience.",
-    ab2:"I learn by experimenting. I look at problems from different angles and pay attention to the details that usually go unnoticed, because that's often where the best solution lives.",
-    ab3:"I believe there's always something new to discover, learn and build. So I step away from the obvious and bring that curiosity to every project.",
-    ctTitle:"Let's <em>talk?</em>", ctText:"Available for new projects and good ideas.", mailApp:"Open in mail ↗", copied:"E-mail copied." }
+    ab2:"I learn by experimenting and look at every problem from more than one angle. I pay attention to the details that go unnoticed, because that's usually where the best solution is.",
+    ctTitle:"Let's <em>talk?</em>", ctText:"Working in Brazil and abroad. Tell me what you need to build.", mailApp:"Open in mail ↗", copied:"E-mail copied." }
 };
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
